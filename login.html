@@ -1,0 +1,90 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500&family=Poppins:ital,wght@0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,600;1,700&family=Work+Sans:ital,wght@0,200;0,400;0,700;0,800;1,100;1,600;1,700&display=swap" rel="stylesheet">
+    
+    
+</head>
+
+<body>
+    <div class='loginbage'>
+        <div class="background"></div>
+        <form id="loginForm">
+            <h3>Login Here</h3>
+            <label class='loginLable' for="username">Username</label>
+            <input class="loginInput" type="text" placeholder="Username" id="username" required autocomplete='off' />
+            <label class='loginLable' for="password">Password</label>
+            <input class="loginInput" type="password" placeholder="Password" id="password" required />
+            <button type='submit' id="login">Log In</button>
+            <div class="social">
+                <div class="go"><a href="register.html">Register</a></div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        function validate() {
+            var name = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            if (name === "") {
+                toastr.error("Please enter a username");
+                return false;
+            }
+            if (password === "") {
+                toastr.error("Please enter a password");
+                return false;
+            }
+            return true;
+        }
+
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            if (!validate()) {
+                return;
+            }
+
+            var name = document.getElementById('username').value.trim();
+            var password = document.getElementById('password').value.trim();
+
+            fetch("http://localhost:3000/users/" + name)
+                .then(function (response) {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(function (resp) {
+                    if (Object.keys(resp).length === 0) {
+                        toastr.error("Please enter a valid username");
+                    } else {
+                        if (resp.password === password) {
+                            alert("Login successful!");
+                            sessionStorage.setItem("name", name);
+                            window.location.href = "index.html";
+                        } else {
+                            alert("Please enter a valid password");
+                        }
+                    }
+                })
+                .catch(function (error) {
+                    console.error("Login failed:", error.message);
+                    alert("Login failed");
+                });
+        });
+    </script>
+</body>
+
+</html>
