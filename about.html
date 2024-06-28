@@ -60,7 +60,50 @@
     </div>
 
 </section>
+<!-- -------------------------------------------FQA---------------------------------- -->
+    
+<div class="accordian">
+    <div class="card">
+        <div class="card-header">
+            <h3>1.Lorem ipsum dolor sit amet consectetur adipisicing elit. </h3><i class="fa-solid fa-arrow-up-long"></i>
+        </div>
+        <div class="card-body active">
+       <div class="container">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem exercitationem culpa vero impedit
+            quaerat nulla alias ut amet quam dolorem autem facere neque esse dignissimos</p>
+            <img class="card-img" src="img/banner.png" alt="cardImg">
+       </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>2.Lorem ipsum dolor sit amet consectetur adipisicing .</h3><i class="fa-solid fa-arrow-down-long"></i>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem exercitationem culpa vero impedit
+                    quaerat  dignissimos,
+                    itaque doloribus assumenda omnis accusantium!</p>
+                    <img class="card-img" src="img/library.png" alt="cardImg">
+               </div>
 
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3>3.Lorem ipsum dolor sit amet  adipisicing elit. </h3><i class="fa-solid fa-arrow-down-long"></i>
+        </div>
+        <div class="card-body">
+            <div class="container">
+                <p>Lorem ipsum dolor sit amet  exercitationem culpa vero impedit
+                    quaerat nulla alias ut amet quam dolorem autem facere neque esse dignissimos,
+                    itaque doloribus assumenda omnis accusantium!</p>
+                    <img class="card-img" src="img/banner2.jpg" alt="cardImg">
+               </div>
+
+        </div>
+    </div>
+</div>
 
 
 <!-- -----------------------------foter---------------------------------------------- -->
@@ -80,6 +123,8 @@
     <p> made with  <i class="fa-regular fa-heart"></i> by easy totrial</p>
 
 </section>
+<script src="jQuery.js"></script>
+
 <script>
     var navlinks =document.getElementById("navlinks");
     function showmenu()
@@ -89,6 +134,28 @@
     function hidemenu(){
         navlinks.style.right="-2000px";
     }
+
+
+    // -----------------------------
+    $(document).ready(function(){
+    $(".card-header").click(function(){
+        if($(this).next(".card-body").hasClass("active")){
+            $(this).next(".card-body").removeClass("active").slideUp();
+            $(".card-header").not(this).find("i").removeClass("fa-arrow-up-long").addClass("fa-arrow-down-long");
+            $(this).find("i").removeClass("fa-arrow-up-long").addClass("fa-arrow-down-long");
+
+        } else {
+            $(".card-body.active").removeClass("active").slideUp();
+            $(this).next(".card-body").slideDown().addClass("active");
+            $(this).find("i").removeClass("fa-arrow-down-long").addClass("fa-arrow-up-long");
+            $(".card-header").not(this).find("i").removeClass("fa-arrow-up-long").addClass("fa-arrow-down-long");
+        }
+    });
+});
+
+
+
+
 </script>
 </body>
 </html>
